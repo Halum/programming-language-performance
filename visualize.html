@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Language Performance</title>
+    <style>
+        body {
+            margin: 10%;
+        }
+    </style>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <h1>Programming Language Performance</h1>
+    <script>
+        const SVG_WIDTH = 800;
+        const SVG_HEIGHT = 400;
+        const TEXT_X = 50;
+        const RECT_X = 200;
+        const RECT_WIDTH = 500;
+        const RECT_HEIGHT = 5;
+        const CIRCLE_RADIUS = 8;
+        const Y_OFFSET = 70;
+        const TEXT_Y_OFFSET = 50;
+        const RECT_Y_OFFSET = TEXT_Y_OFFSET - 5;
+        const CIRCLE_Y_OFFSET = RECT_Y_OFFSET + RECT_HEIGHT / 2;
+        const SPEED_FACTOR = 1000
+
+        async function fetchData() {
+            const response = await fetch('perf_data.csv');
+            const data = await response.text();
+            const rows = data.split('\n');
+            return rows.slice(1)
+            .map(row => row.split(','))
+            .filter(row => row.length > 1) // Skip the header row and filter out empty rows
+            .sort((a, b) => parseFloat(b[1]) - parseFloat(a[1])); // Sort by the second column value desc
+        }
+
+        async function drawData() {
+            const data = await fetchData();
+            console.log(data)
+            const languages = data.map(d => d[0]); // Assuming the first column is the language name
+
+            const svg = d3.select("body").append("svg")
+                .attr("width", SVG_WIDTH)
+                .attr("height", SVG_HEIGHT)
+                .style("border", "1px solid black"); // Add border to the SVG canvas
+
+            svg.selectAll("text")
+                .data(languages)
+                .enter()
+                .append("text")
+                .attr("x", TEXT_X)
+                .attr("y", (d, i) => TEXT_Y_OFFSET + i * Y_OFFSET)
+                .text(d => d)
+                .attr("font-size", "20px")
+                .attr("fill", "black");
+
+            svg.selectAll("rect")
+                .data(languages)
+                .enter()
+                .append("rect")
+                .attr("x", RECT_X)
+                .attr("y", (d, i) => RECT_Y_OFFSET + i * Y_OFFSET)
+                .attr("width", RECT_WIDTH)
+                .attr("height", RECT_HEIGHT)
+                .attr("fill", "none")
+                .attr("stroke", "gray")
+                .attr("stroke-dasharray", "20,5"); // Increase the length of the dashes
+
+            const speeds = data.map(d => parseFloat(d[1]) / 10000); // Assuming the second column is the speed value
+
+            const circles = svg.selectAll("circle")
+                .data(speeds)
+                .enter()
+                .append("circle")
+                .attr("cx", RECT_X)
+                .attr("cy", (d, i) => CIRCLE_Y_OFFSET + i * Y_OFFSET)
+                .attr("r", CIRCLE_RADIUS)
+                .attr("fill", "gray")
+                .attr("stroke", "orange")
+                .attr("stroke-width", 3);
+
+            function animateCircles() {
+                circles.each(function(d, i) {
+                    const circle = d3.select(this);
+                    const distance = RECT_WIDTH;
+                    const duration = (distance / d) * SPEED_FACTOR; // Use speed value for duration
+
+                    (function repeat() {
+                        circle.transition()
+                            .duration(duration)
+                            .ease(d3.easeLinear)
+                            .attr("cx", RECT_X + RECT_WIDTH)
+                            .transition()
+                            .duration(duration)
+                            .ease(d3.easeLinear)
+                            .attr("cx", RECT_X)
+                            .on("end", repeat); // Repeat the animation
+                    })();
+                });
+            }
+
+            animateCircles();
+        }
+
+        drawData();
+    </script>
+</body>
+</html>

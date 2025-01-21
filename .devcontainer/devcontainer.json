@@ -1,0 +1,16 @@
+{
+    "name": "Programming Language Performance", // The name of the development container
+    "build": {
+        "dockerfile": "Dockerfile" // Specifies the Dockerfile to use for building the container
+    },
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash" // Sets the default shell for the integrated terminal to bash
+    },
+    "extensions": [
+        "ms-python.python", // Python extension for VS Code
+        "redhat.java", // Java extension for VS Code
+        "ms-vscode.cpptools", // C++ extension for VS Code
+        "dbaeumer.vscode-eslint" // ESLint extension for VS Code
+    ],
+    "remoteUser": "root" // Specifies the user to use in the container
+}
