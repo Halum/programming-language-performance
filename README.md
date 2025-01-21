@@ -38,3 +38,14 @@ No compilation needed. Run directly with:
 ```sh
 node ./languages/js_prime.js
 ```
+
+## Serving Visualization
+
+To visualize the performance results, you can serve the `visualize.html` file using Python's built-in HTTP server. Follow these steps:
+
+1. Open a terminal inside the dev container.
+2. Start the HTTP server:
+    ```sh
+    python -m http.server
+    ```
+3. Open your web browser and go to `http://localhost:8000/visualize.html` to view the visualization.
