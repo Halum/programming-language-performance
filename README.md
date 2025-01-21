@@ -3,6 +3,13 @@
 
 The goal of this project is to compare the performance of different programming languages by implementing the same algorithm in each language and measuring their execution times.
 
+## Environment Setup using VSCode Dev Container
+
+To ensure a consistent development environment, you can use a VSCode Dev Container. Follow these steps:
+
+1. Install the [Dev - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in VSCode.
+2. Reopen the project in the container by clicking on the green button in the bottom-left corner of VSCode and selecting "Reopen in Container".
+
 ## Compilation Instructions
 
 ### C
@@ -10,7 +17,7 @@ The goal of this project is to compare the performance of different programming 
 gcc ./languages/c_prime.c -o ./compiled/c_prime.o && ./compiled/c_prime.o
 ```
 
-### C (Optmized Compile)
+### C (Optimized Compile)
 ```sh
 gcc -O3 ./languages/c_prime.c -o ./compiled/c_prime.o && ./compiled/c_prime.o
 ```
