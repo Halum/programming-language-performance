@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const RUN_TIME = 5; // seconds
-const OUTPUT_FILE = './../output/perf_data.csv';
+const OUTPUT_FILE = 'output/perf_data.csv';
 
 function isPrime(n) {
     if (n < 2) {
@@ -17,7 +17,7 @@ function isPrime(n) {
 
 function savePerfData(calculations, totalTime) {
     const fileExists = fs.existsSync(OUTPUT_FILE);
-    const data = `${fileExists ? '' : 'language,calculation,time\n'}javascript,${calculations},${totalTime.toFixed(6)}\n`;
+    const data = `${fileExists ? '' : 'language,calculation,time\n'}JavaScript,${calculations},${totalTime.toFixed(6)}\n`;
 
     fs.appendFileSync(OUTPUT_FILE, data, 'utf8');
 }

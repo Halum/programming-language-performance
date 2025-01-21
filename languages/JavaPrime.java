@@ -1,4 +1,3 @@
-package languages;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
@@ -6,7 +5,7 @@ import java.io.PrintWriter;
 
 public class JavaPrime {
     private static final int RUN_TIME = 5; // seconds
-    private static final String OUTPUT_FILE = "./../output/perf_data.csv";
+    private static final String OUTPUT_FILE = "output/perf_data.csv";
 
     public static void main(String[] args) {
         double tStart = System.currentTimeMillis();

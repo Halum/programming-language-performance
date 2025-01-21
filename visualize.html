@@ -25,10 +25,10 @@
         const TEXT_Y_OFFSET = 50;
         const RECT_Y_OFFSET = TEXT_Y_OFFSET - 5;
         const CIRCLE_Y_OFFSET = RECT_Y_OFFSET + RECT_HEIGHT / 2;
-        const SPEED_FACTOR = 1000
+        const SPEED_FACTOR = 2000
 
         async function fetchData() {
-            const response = await fetch('perf_data.csv');
+            const response = await fetch('./output/perf_data.csv');
             const data = await response.text();
             const rows = data.split('\n');
             return rows.slice(1)
@@ -39,7 +39,6 @@
 
         async function drawData() {
             const data = await fetchData();
-            console.log(data)
             const languages = data.map(d => d[0]); // Assuming the first column is the language name
 
             const svg = d3.select("body").append("svg")

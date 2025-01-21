@@ -4,7 +4,7 @@ import csv
 import os
 
 RUN_TIME = 5 # seconds
-OUTPUT_FILE = './../output/perf_data.csv'
+OUTPUT_FILE = 'output/perf_data.csv'
 
 def is_prime(n):
     if n < 2:
@@ -21,7 +21,7 @@ def save_perf_data(calculations, total_time):
         writer = csv.writer(file)
         if not file_exists:
             writer.writerow(['language', 'calculation', 'time'])
-        writer.writerow(['python', calculations, total_time])
+        writer.writerow(['Python', calculations, total_time])
 
 
 def main():

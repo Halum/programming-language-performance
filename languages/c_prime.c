@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <time.h>
 
-#define RUN_TIME 2 // seconds
-#define OUTPUT_FILE "./../output/perf_data.csv"
+#define RUN_TIME 5 // seconds
+#define OUTPUT_FILE "output/perf_data.csv"
 
 bool is_prime(long long int n) {
     if (n < 2) {
