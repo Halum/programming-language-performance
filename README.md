@@ -49,3 +49,7 @@ To visualize the performance results, you can serve the `visualize.html` file us
     python -m http.server
     ```
 3. Open your web browser and go to `http://localhost:8000/visualize.html` to view the visualization.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
